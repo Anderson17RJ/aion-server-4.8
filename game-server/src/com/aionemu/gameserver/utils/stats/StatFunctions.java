@@ -3,6 +3,8 @@ package com.aionemu.gameserver.utils.stats;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.model.PlayerClass;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
@@ -28,6 +30,7 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.configs.main.MyConfigs;
 
 /**
  * Calculations are based on the following research:<br>
@@ -472,6 +475,50 @@ public class StatFunctions {
 					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
 			}
 		}
+		
+		if (attacker instanceof Player){
+			PlayerClass playerClass = ((Player) attacker).getPlayerClass();
+			if (playerClass != null) {
+				switch (playerClass) {
+					case GLADIATOR:
+						damage *= MyConfigs.DAMAGE_GLAD;
+						break;
+					case TEMPLAR:
+						damage *= MyConfigs.DAMAGE_TEMPLAR;
+						break;
+					case SORCERER:
+						damage *= MyConfigs.DAMAGE_SORCERER;
+						break;
+					case SPIRIT_MASTER:
+						damage *= MyConfigs.DAMAGE_SM;
+						break;
+					case BARD:
+						damage *= MyConfigs.DAMAGE_BARD;
+						break;
+					case RIDER:
+						damage *= MyConfigs.DAMAGE_RIDER;
+						break;
+					case CLERIC:
+						damage *= MyConfigs.DAMAGE_CLERIC;
+						break;
+					case GUNNER:
+						damage *= MyConfigs.DAMAGE_GUNNER;
+						break;
+					case RANGER:
+						damage *= MyConfigs.DAMAGE_RANGER;
+						break;
+					case CHANTER:
+						damage *= MyConfigs.DAMAGE_CHANTER;
+						break;
+					case ASSASSIN:
+						damage *= MyConfigs.DAMAGE_ASSASSIN;
+						break;
+					default:
+						damage *= 1.0f;
+				}
+			}
+		}
+		
 		return damage + (damage * attackBonus) - (damage * defenseBonus);
 	}
 
