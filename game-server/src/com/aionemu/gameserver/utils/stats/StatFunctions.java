@@ -476,45 +476,47 @@ public class StatFunctions {
 			}
 		}
 		
-		if (attacker instanceof Player){
-			PlayerClass playerClass = ((Player) attacker).getPlayerClass();
-			if (playerClass != null) {
-				switch (playerClass) {
-					case GLADIATOR:
-						damage *= MyConfigs.DAMAGE_GLAD;
-						break;
-					case TEMPLAR:
-						damage *= MyConfigs.DAMAGE_TEMPLAR;
-						break;
-					case SORCERER:
-						damage *= MyConfigs.DAMAGE_SORCERER;
-						break;
-					case SPIRIT_MASTER:
-						damage *= MyConfigs.DAMAGE_SM;
-						break;
-					case BARD:
-						damage *= MyConfigs.DAMAGE_BARD;
-						break;
-					case RIDER:
-						damage *= MyConfigs.DAMAGE_RIDER;
-						break;
-					case CLERIC:
-						damage *= MyConfigs.DAMAGE_CLERIC;
-						break;
-					case GUNNER:
-						damage *= MyConfigs.DAMAGE_GUNNER;
-						break;
-					case RANGER:
-						damage *= MyConfigs.DAMAGE_RANGER;
-						break;
-					case CHANTER:
-						damage *= MyConfigs.DAMAGE_CHANTER;
-						break;
-					case ASSASSIN:
-						damage *= MyConfigs.DAMAGE_ASSASSIN;
-						break;
-					default:
-						damage *= 1.0f;
+		if(MyConfigs.ENABLE_ADJUSTMENT_DAMAGE) {
+			if (attacker instanceof Player) {
+				PlayerClass playerClass = ((Player) attacker).getPlayerClass();
+				if (playerClass != null) {
+					switch (playerClass) {
+						case GLADIATOR:
+							damage *= MyConfigs.DAMAGE_GLAD;
+							break;
+						case TEMPLAR:
+							damage *= MyConfigs.DAMAGE_TEMPLAR;
+							break;
+						case SORCERER:
+							damage *= MyConfigs.DAMAGE_SORCERER;
+							break;
+						case SPIRIT_MASTER:
+							damage *= MyConfigs.DAMAGE_SM;
+							break;
+						case BARD:
+							damage *= MyConfigs.DAMAGE_BARD;
+							break;
+						case RIDER:
+							damage *= MyConfigs.DAMAGE_RIDER;
+							break;
+						case CLERIC:
+							damage *= MyConfigs.DAMAGE_CLERIC;
+							break;
+						case GUNNER:
+							damage *= MyConfigs.DAMAGE_GUNNER;
+							break;
+						case RANGER:
+							damage *= MyConfigs.DAMAGE_RANGER;
+							break;
+						case CHANTER:
+							damage *= MyConfigs.DAMAGE_CHANTER;
+							break;
+						case ASSASSIN:
+							damage *= MyConfigs.DAMAGE_ASSASSIN;
+							break;
+						default:
+							damage *= 1.0f;
+					}
 				}
 			}
 		}

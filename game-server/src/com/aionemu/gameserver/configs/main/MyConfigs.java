@@ -38,5 +38,8 @@ public class MyConfigs {
 
 	@Property(key = "gameserver.damage.rider", defaultValue = "1.0")
 	public static float DAMAGE_RIDER;
+
+	@Property(key = "gameserver.enable.adjustment", defaultValue = "false")
+	public static boolean ENABLE_ADJUSTMENT_DAMAGE;
 	
 }
