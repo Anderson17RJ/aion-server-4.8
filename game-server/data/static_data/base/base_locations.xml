@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="base_locations.xsd">
+	<!-- Eltnen -->
+	<base_location id="2120" type="CASUAL" world="210020000"/>
+	<base_location id="2121" type="CASUAL" world="210020000"/>
+	<!-- Heiron -->
+	<base_location id="2140" type="CASUAL" world="210040000"/>
+	<base_location id="2141" type="CASUAL" world="210040000"/>
+	<!-- Morheim -->
+	<base_location id="2220" type="CASUAL" world="220020000"/>
+	<base_location id="2221" type="CASUAL" world="220020000"/>
+	<!-- Beluslan -->
+	<base_location id="2240" type="CASUAL" world="220040000"/>
+	<base_location id="2241" type="CASUAL" world="220040000"/>
+	<!-- Kaldor -->
+	<base_location id="6090" type="CASUAL" world="600090000"/>
+	<base_location id="6091" type="CASUAL" world="600090000"/>
+	<base_location id="6092" type="SIEGE" world="600090000"/>
+	<base_location id="6093" type="SIEGE" world="600090000"/>
+	<base_location id="6094" type="SIEGE" world="600090000"/>
+	<!-- Levinshor -->
+	<base_location id="6101" type="STAINED" color="GREEN" world="600100000"/>
+	<base_location id="6102" type="STAINED" color="BLUE" world="600100000"/>
+	<base_location id="6103" type="STAINED" color="BLUE" world="600100000"/>
+	<base_location id="6104" type="STAINED" color="BLUE" world="600100000"/>
+	<base_location id="6105" type="STAINED" color="YELLOW" world="600100000"/>
+	<base_location id="6106" type="STAINED" color="YELLOW" world="600100000"/>
+	<base_location id="6107" type="STAINED" color="RED" world="600100000"/>
+	<base_location id="6108" type="STAINED" color="RED" world="600100000"/>
+	<base_location id="6109" type="STAINED" color="RED" world="600100000"/>
+	<base_location id="6110" type="STAINED" color="GREEN" world="600100000"/>
+	<base_location id="6111" type="STAINED" color="GREEN" world="600100000"/>
+	<base_location id="6112" type="STAINED" color="YELLOW" world="600100000"/>
+	<base_location id="6113" type="CASUAL" world="600100000"/>
+</base_locations>
