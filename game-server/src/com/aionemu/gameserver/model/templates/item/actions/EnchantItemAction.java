@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.MyConfigs;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.enchants.EnchantmentStone;
@@ -108,7 +109,7 @@ public class EnchantItemAction extends AbstractItemAction {
 		boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
-			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), enchantDurationMillis, 0, 0, 1, 0, 0));
+			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), MyConfigs.ENCHANT_CAST_DELAY, 0, 0, 1, 0, 0));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -142,7 +143,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				}
 			}
 
-		}, enchantDurationMillis));
+		}, MyConfigs.ENCHANT_CAST_DELAY));
 	}
 
 	/**
@@ -162,7 +163,9 @@ public class EnchantItemAction extends AbstractItemAction {
 	 * @return true if successful
 	 */
 	private boolean isSuccess(final Player player, final Item parentItem, final Item targetItem, final Item supplementItem, final int targetWeapon) {
-		if (parentItem.getItemTemplate() != null) {
+		if (MyConfigs.ENCHANT_ALWAYSSUCESS){
+			return true;
+		} if (parentItem.getItemTemplate() != null) {
 			// Item template
 			ItemTemplate itemTemplate = parentItem.getItemTemplate();
 			// Enchantment stone

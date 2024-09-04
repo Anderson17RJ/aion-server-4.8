@@ -42,4 +42,15 @@ public class MyConfigs {
 	@Property(key = "gameserver.enable.adjustment", defaultValue = "false")
 	public static boolean ENABLE_ADJUSTMENT_DAMAGE;
 	
+	
+	/*
+	Custom Enchants Type
+	 */
+	@Property(key = "gameserver.manastone.cast_delay", defaultValue = "5000")
+	public static int ENCHANT_CAST_DELAY;
+
+	@Property(key = "gameserver.manastone.alwayssucess", defaultValue = "false")
+	public static boolean ENCHANT_ALWAYSSUCESS;
+	
+	
 }
