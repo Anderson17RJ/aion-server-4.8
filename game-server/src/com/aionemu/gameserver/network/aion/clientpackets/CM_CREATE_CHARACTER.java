@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.configs.main.MyConfigs;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
@@ -62,7 +63,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 		playerCommonData.setGender(gender);
 		playerCommonData.setRace(race);
 		playerCommonData.setPlayerClass(playerClass);
-		playerCommonData.setLevel(1); // level (exp) must be set after class
+		playerCommonData.setLevel(MyConfigs.START_MAXLEVEL); // level (exp) must be set after class
 		PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, playerAppearance);
 		Player player = PlayerService.newPlayer(accPlData, account);
 

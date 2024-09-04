@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.configs.main.MyConfigs;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
@@ -14,6 +15,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionT
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ATracer, sweetkr, Neon
@@ -47,6 +52,21 @@ public class ClassChangeService {
 		qs.setRewardGroup(0);
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 	}
+	
+	public static void completeQuest(Player player, int questId) {
+		QuestState gs = player.getQuestStateList().getQuestState(questId);
+		if (gs == null) {
+			gs = new QuestState(questId, QuestStatus.COMPLETE);
+			player.getQuestStateList().addQuest(questId, gs);
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ADD, gs));
+		} else {
+			gs.setStatus(QuestStatus.COMPLETE);
+			gs.setCompleteCount(gs.getCompleteCount() + 1);
+		}
+		gs.setQuestVar(0);
+		gs.setRewardGroup(0);
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, gs));
+	}
 
 	public static boolean setClass(Player player, PlayerClass newClass) {
 		return setClass(player, newClass, true, false);
@@ -75,6 +95,19 @@ public class ClassChangeService {
 		PacketSendUtility.broadcastPacket(player, new SM_ACTION_ANIMATION(player.getObjectId(), ActionAnimation.CLASS_CHANGE, player.getLevel()), true);
 		PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player));
 		SkillLearnService.learnNewSkills(player, 9, player.getLevel());
+		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+		scheduler.schedule(() -> {
+			player.getCommonData().setLevel(MyConfigs.START_MAXLEVEL_AFTERLOG);
+		}, 2, TimeUnit.SECONDS);
+		if (MyConfigs.STIGMA_CUSTOM) {
+			if (player.getRace() == Race.ASMODIANS) {
+				completeQuest(player, 2900);
+			}
+			
+			if (player.getRace() == Race.ELYOS) {
+				completeQuest(player, 1929);
+			}
+		}
 
 		if (updateDaevaStatus) {
 			if (!newClass.isStartingClass()) {

@@ -53,4 +53,18 @@ public class MyConfigs {
 	public static boolean ENCHANT_ALWAYSSUCESS;
 	
 	
+	/*
+	Custom Level
+	 */
+
+	@Property(key = "gameserver.max.startlevel", defaultValue = "1")
+	public static int START_MAXLEVEL;
+
+	@Property(key = "gameserver.stigma.custom", defaultValue = "false")
+	public static boolean STIGMA_CUSTOM;
+
+	@Property(key = "gameserver.max.startlevel.afterlog", defaultValue = "1")
+	public static int START_MAXLEVEL_AFTERLOG;
+	
+	
 }
